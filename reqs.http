@@ -1,8 +1,18 @@
-@server = https://texai-glowing-couscous-pgprxq9gwh76xw-8080.preview.app.github.dev
+@server = https://super-invention-rrpgjv5wj3xj56-8080.app.github.dev
 ###
-GET {{server}}/api/employees 
+GET {{server}}/api/instrumentos
 ###
-POST {{server}}/api/employees
+POST {{server}}/api/instrumentos
 Content-Type: application/json
 
-{"firstName": "Mi", "lastName": "Aplicación", "description": "React"}
+{"nombre": "Quena", "categoria": "Viento", "descripcion": "Como una flauta"}
+###
+GET {{server}}/api/musicos
+###
+POST {{server}}/api/musicos
+Content-Type: application/json
+
+{"nombre": "Joaquín"}
+
+
+
