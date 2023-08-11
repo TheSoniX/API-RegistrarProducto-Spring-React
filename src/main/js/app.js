@@ -6,37 +6,49 @@ const client = require('./client');
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {instrumentos: [],musicos: []};
+		this.state = { instrumentos: [], musicos: [] };
 	}
 	componentDidMount() {
 
-		client({method: 'GET', path: '/api/instrumentos'}).done(response => {
-			this.setState({instrumentos: response.entity._embedded.instrumentos});
+		client({ method: 'GET', path: '/api/instrumentos' }).done(response => {
+			this.setState({ instrumentos: response.entity._embedded.instrumentos });
 		});
 
-		client({method: 'GET', path: '/api/musicos'}).done(response => {
-			this.setState({musicos: response.entity._embedded.musicos});
+		client({ method: 'GET', path: '/api/musicos' }).done(response => {
+			this.setState({ musicos: response.entity._embedded.musicos });
 		});
 
 	}
 	render() {
 		return (
 			<>
-				<h2>Lista de Instrumentos</h2>
-				<InstrumentoList instrumentos={this.state.instrumentos}/>
-				<hr />
-				<h2>Lista de Musicos</h2>
-				<MusicoList musicos={this.state.musicos}/>
+				<h1>Semana 12 App</h1>
+				<Titulo entidad="Intrumentos" emoji="🎸" />
+				<InstrumentoList instrumentos={this.state.instrumentos} />
+				<Titulo entidad="Musicos" emoji="🎶" />
+				<MusicoList musicos={this.state.musicos} />
 
 			</>
 		)
 	}
 }
 
-class InstrumentoList extends React.Component{
+const Titulo = (props) => {
+	return (
+		<>
+			<hr />
+			<h2>{props.emoji} - {props.entidad}</h2>
+			<hr />
+			Lista completa de {props.entidad.toLowerCase()}
+		</>
+	)
+}
+
+
+class InstrumentoList extends React.Component {
 	render() {
 		const instrumentos = this.props.instrumentos.map(instrumento =>
-			<Instrumento key={instrumento._links.self.href} instrumento={instrumento}/>
+			<Instrumento key={instrumento._links.self.href} instrumento={instrumento} />
 		);
 		return (
 			<table>
@@ -52,10 +64,10 @@ class InstrumentoList extends React.Component{
 		)
 	}
 }
-class MusicoList extends React.Component{
+class MusicoList extends React.Component {
 	render() {
 		const musicos = this.props.musicos.map(musico =>
-			<Musico key={musico._links.self.href} musico={musico}/>
+			<Musico key={musico._links.self.href} musico={musico} />
 		);
 		return (
 			<table>
@@ -70,7 +82,7 @@ class MusicoList extends React.Component{
 	}
 }
 
-class Instrumento extends React.Component{
+class Instrumento extends React.Component {
 	render() {
 		return (
 			<tr>
@@ -81,7 +93,7 @@ class Instrumento extends React.Component{
 		)
 	}
 }
-class Musico extends React.Component{
+class Musico extends React.Component {
 	render() {
 		return (
 			<tr>
