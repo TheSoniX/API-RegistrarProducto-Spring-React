@@ -55,7 +55,7 @@ class InstrumentoList extends React.Component {
 					<tr>
 						<th>Nombre</th>
 						<th>Categoría</th>
-						<th>Descripción</th>
+						<th>Acciones</th>
 					</tr>
 					{instrumentos}
 				</tbody>
@@ -83,11 +83,14 @@ class MusicoList extends React.Component {
 
 class Instrumento extends React.Component {
 	render() {
+		const id = this.props.instrumento._links.self.href.split("/").slice(-1)
 		return (
 			<tr>
 				<td>{this.props.instrumento.nombre}</td>
 				<td>{this.props.instrumento.categoria}</td>
-				<td>{this.props.instrumento.descripcion}</td>
+				<td>
+					<Link to={"/ver-instrumento/" + id}>Ver</Link>
+				</td>
 			</tr>
 		)
 	}
