@@ -40952,7 +40952,7 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "GroWShop"), /*#__PURE__*/React.createElement(Titulo, {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "GroWShop (componente: HomePage)"), /*#__PURE__*/React.createElement(Titulo, {
         entidad: "Productos",
         emoji: "\uD83C\uDF3F\uD83C\uDF41\uD83C\uDF3F\uD83C\uDF31"
       }), /*#__PURE__*/React.createElement(ProductoList, {

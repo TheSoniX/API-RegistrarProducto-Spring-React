@@ -10,8 +10,8 @@ const VerProductoPage = () => {
 
     client({
         method: 'GET',
-        path: '/api/productos' + id
-    }).done(Response=>setProducto(response.entity))
+        path: '/api/productos/' + id
+    }).done(response=>setProducto(response.entity))
 
     return(
         <>
@@ -30,6 +30,7 @@ const VerProductoPage = () => {
                     <td>{producto.cantidad}</td>
                 </tr>
             </table>
+                <Link to="/">Volver</Link>
         </>
     )
 }

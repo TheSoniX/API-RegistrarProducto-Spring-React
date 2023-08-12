@@ -25,6 +25,7 @@ const VerCategoriaPage = () => {
             < Link to="/">Regresar</Link>
         </>
     )
+
 }
 
 module.exports = VerCategoriaPage;

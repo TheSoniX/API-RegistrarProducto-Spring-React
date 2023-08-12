@@ -21,7 +21,7 @@ class HomePage extends React.Component {
 	render() {
 		return (
 			<>
-				<h1>GroWShop</h1>
+				<h1>GroWShop (componente: HomePage)</h1>
 				<Titulo entidad="Productos" emoji="🌿🍁🌿🌱" />
 				<ProductoList productos={this.state.productos} />
 				<Link to="/registrarProducto">Registrar Producto</Link>
