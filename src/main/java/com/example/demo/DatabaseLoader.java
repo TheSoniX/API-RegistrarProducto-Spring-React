@@ -7,20 +7,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-	private final InstrumentoRepository repositoryI;
-	private final MusicoRepository repositoryM;
+	private final ProductoRepository repositoryP;
+	private final CategoriaRepository repositoryC;
 
 	@Autowired
-	public DatabaseLoader(InstrumentoRepository repositoryI, MusicoRepository repositoryM) {
-		this.repositoryI = repositoryI;
-		this.repositoryM = repositoryM;
+	public DatabaseLoader(ProductoRepository repositoryP, CategoriaRepository repositoryC) {
+		this.repositoryP = repositoryP;
+		this.repositoryC = repositoryC;
 	}
 
 	@Override
 	public void run(String... strings) throws Exception {
-		this.repositoryI.save(new Instrumento("Guitarra", "Cuerda", "de madera, con caja de resonancia, 6 cuerdas templadas"));
-		this.repositoryI.save(new Instrumento("Ukelele","Cuerda","de madera, con caja de resonancia pequeña, 4 cuerdas templadas"));
-		this.repositoryI.save(new Instrumento("Melódica","Viento","teclado pequeño de 2 octavas, sonorizado por soplido"));
-		this.repositoryM.save(new Musico("Daniel F"));
+		this.repositoryP.save(new Producto("Leche", "Gloria", "5"));
+		this.repositoryP.save(new Producto("Leche en caja","Pura Vida","7"));
+		this.repositoryP.save(new Producto("Jamon Ingles","San Fernando","7 pqts"));
+		this.repositoryC.save(new Categoria("Lacteo"));
+		this.repositoryC.save(new Categoria("Embutidos"));
 	}
 }

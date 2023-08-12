@@ -1,18 +1,18 @@
-@server = https://glowing-couscous-j4q5xwwpw257g5-8080.app.github.dev
+@server = https://glorious-space-trout-vpwg7qwjx4v2pj97-8080.app.github.dev
 ###
-GET {{server}}/api/instrumentos/2
+GET {{server}}/api/productos/2
 ###
-POST {{server}}/api/instrumentos
+POST {{server}}/api/productos
 Content-Type: application/json
 
-{"nombre": "Quena", "categoria": "Viento", "descripcion": "Como una flauta"}
+{"nombre": "Leche en tarro grande", "marca": "Ideal", "cantidad": "4"}
 ###
-GET {{server}}/api/musicos
+GET {{server}}/api/categorias
 ###
-POST {{server}}/api/musicos
+POST {{server}}/api/categorias
 Content-Type: application/json
 
-{"nombre": "Joaquín"}
+{"nombre": "Lacteo"}
 
 
 

@@ -5,29 +5,29 @@ const {Link} = require('react-router-dom');
 class HomePage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { instrumentos: [], musicos: [] };
+		this.state = { productos: [], categorias: [] };
 	}
 	componentDidMount() {
 
-		client({ method: 'GET', path: '/api/instrumentos' }).done(response => {
-			this.setState({ instrumentos: response.entity._embedded.instrumentos });
+		client({ method: 'GET', path: '/api/productos' }).done(response => {
+			this.setState({ productos: response.entity._embedded.instrumentos });
 		});
 
-		client({ method: 'GET', path: '/api/musicos' }).done(response => {
-			this.setState({ musicos: response.entity._embedded.musicos });
+		client({ method: 'GET', path: '/api/categorias' }).done(response => {
+			this.setState({ categorias: response.entity._embedded.musicos });
 		});
 
 	}
 	render() {
 		return (
 			<>
-				<h1>Semana 12 App (componente: HomePage)</h1>
-				<Titulo entidad="Intrumentos" emoji="🎸" />
-				<InstrumentoList instrumentos={this.state.instrumentos} />
-				<Link to="/nuevo-instrumento">Nuevo Instrumento</Link>
-				<Titulo entidad="Musicos" emoji="🎶" />
-				<MusicoList musicos={this.state.musicos} />
-				<Link to="/nuevo-musico">Nuevo Músico</Link>
+				<h1>GroWShop</h1>
+				<Titulo entidad="Productos" emoji="🌿🍁🌿🌱" />
+				<ProductoList productos={this.state.productos} />
+				<Link to="/registrarProducto">Registrar Producto</Link>
+				<Titulo entidad="Categorias" emoji="🌱🪴🌲" />
+				<CategoriaList categorias={this.state.categorias} />
+				<Link to="/registrarCategoria">Ingresa Categoria</Link>
 			</>
 		)
 	}
@@ -45,29 +45,29 @@ const Titulo = (props) => {
 }
 
 
-class InstrumentoList extends React.Component {
+class ProductoList extends React.Component {
 	render() {
-		const instrumentos = this.props.instrumentos.map(instrumento =>
-			<Instrumento key={instrumento._links.self.href} instrumento={instrumento} />
+		const productos = this.props.productos.map(producto =>
+			<Producto key={producto._links.self.href} producto={producto} />
 		);
 		return (
 			<table border="1">
 				<tbody>
 					<tr>
 						<th>Nombre</th>
-						<th>Categoría</th>
+						<th>Marca</th>
 						<th>Acciones</th>
 					</tr>
-					{instrumentos}
+					{productos}
 				</tbody>
 			</table>
 		)
 	}
 }
-class MusicoList extends React.Component {
+class CategoriaList extends React.Component {
 	render() {
-		const musicos = this.props.musicos.map(musico =>
-			<Musico key={musico._links.self.href} musico={musico} />
+		const categorias = this.props.categorias.map(categoria =>
+			<Categoria key={categoria._links.self.href} categoria={categoria} />
 		);
 		return (
 			<table border="1">
@@ -76,36 +76,36 @@ class MusicoList extends React.Component {
 						<th>Nombre</th>
 						<th>Acciones</th>
 					</tr>
-					{musicos}
+					{categorias}
 				</tbody>
 			</table>
 		)
 	}
 }
 
-class Instrumento extends React.Component {
+class Producto extends React.Component {
 	render() {
-		const id = this.props.instrumento._links.self.href.split("/").slice(-1)
+		const id = this.props.producto._links.self.href.split("/").slice(-1)
 		return (
 			<tr>
-				<td>{this.props.instrumento.nombre}</td>
-				<td>{this.props.instrumento.categoria}</td>
+				<td>{this.props.producto.nombre}</td>
+				<td>{this.props.producto.marca}</td>
 				<td>
-					<Link to={"/ver-instrumento/" + id}>Ver</Link>
+					<Link to={"/listar-producto/" + id}>Ver</Link>
 				</td>
 			</tr>
 		)
 	}
 }
-class Musico extends React.Component {
+class Categoria extends React.Component {
 	render() {
-		const id = this.props.musico._links.self.href.split("/").slice(-1)
+		const id = this.props.categoria._links.self.href.split("/").slice(-1)
 
 		return (
 			<tr>
-				<td>{this.props.musico.nombre}</td>
+				<td>{this.props.categoria.nombre}</td>
 				<td>
-					<Link to={"/ver-musico/" + id}>Ver</Link>
+					<Link to={"/listar-categoria/" + id}>Ver</Link>
 				</td>
 			</tr>
 		)
