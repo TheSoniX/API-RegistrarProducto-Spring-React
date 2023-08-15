@@ -3,19 +3,22 @@ const ReactDOM = require('react-dom');
 const {createBrowserRouter, RouterProvider} = require('react-router-dom');
 
 const HomePage = require('./pages/home');
-/*
-const NuevoMusicoPage = require('./pages/nuevo-musico');
-const VerInstrumentoPage = require('./pages/ver-instrumento');
-const NuevoInstrumentoPage = require('./pages/nuevo-instrumento');
-const VerMusicoPage = require('./pages/ver-musico');
-*/
+
+const NuevoProductoPage = require('./pages/registrarProducto');
+const VerProductoPage = require('./pages/listar-producto');
+
+const NuevoCategoriaPage = require('./pages/registrarCategoria');
+const VerCategoriaPage = require('./pages/listar-categoria');
+
 
 const router = createBrowserRouter([
 	{ path: '/', element: <HomePage /> },
-	/*{ path: '/ver-instrumento/:id', element: <VerInstrumentoPage /> },
-	{ path: '/nuevo-instrumento', element: <NuevoInstrumentoPage /> },
-	{ path: '/ver-musico/:id', element: <VerMusicoPage /> },
-	{ path: '/nuevo-musico', element: <NuevoMusicoPage /> },*/
+	
+	{ path: '/listar-producto/:id', element: <VerProductoPage /> },
+	{ path: '/registrarProducto', element: <NuevoProductoPage /> },
+	
+	{ path: '/listar-categoria/:id', element: <VerCategoriaPage /> },
+	{ path: '/registrarCategoria', element: <NuevoCategoriaPage /> },
 ])
 
 

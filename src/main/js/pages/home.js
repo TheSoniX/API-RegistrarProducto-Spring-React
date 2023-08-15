@@ -2,6 +2,7 @@ const React = require('react');
 const client = require('../client');
 const {Link} = require('react-router-dom');
 
+
 class HomePage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -10,18 +11,18 @@ class HomePage extends React.Component {
 	componentDidMount() {
 
 		client({ method: 'GET', path: '/api/productos' }).done(response => {
-			this.setState({ productos: response.entity._embedded.instrumentos });
+			this.setState({ productos: response.entity._embedded.productos });
 		});
 
 		client({ method: 'GET', path: '/api/categorias' }).done(response => {
-			this.setState({ categorias: response.entity._embedded.musicos });
+			this.setState({ categorias: response.entity._embedded.categorias });
 		});
 
 	}
 	render() {
 		return (
 			<>
-				<h1>GroWShop (componente: HomePage)</h1>
+				<h1>Bodega App (componente: HomePage)</h1>
 				<Titulo entidad="Productos" emoji="🌿🍁🌿🌱" />
 				<ProductoList productos={this.state.productos} />
 				<Link to="/registrarProducto">Registrar Producto</Link>
@@ -100,7 +101,6 @@ class Producto extends React.Component {
 class Categoria extends React.Component {
 	render() {
 		const id = this.props.categoria._links.self.href.split("/").slice(-1)
-
 		return (
 			<tr>
 				<td>{this.props.categoria.nombre}</td>
