@@ -20,13 +20,13 @@ class HomePage extends React.Component {
 
 	}
 	render() {
-		return (
+		return ( 
 			<>
 				<h1>Bodega App (componente: HomePage)</h1>
-				<Titulo entidad="Productos" emoji="🌿🍁🌿🌱" />
+				<Titulo entidad="Productos" emoji="🌿" />
 				<ProductoList productos={this.state.productos} />
 				<Link to="/registrarProducto">Registrar Producto</Link>
-				<Titulo entidad="Categorias" emoji="🌱🪴🌲" />
+				<Titulo entidad="Categorias" emoji="🌲" />
 				<CategoriaList categorias={this.state.categorias} />
 				<Link to="/registrarCategoria">Ingresa Categoria</Link>
 			</>
@@ -57,9 +57,11 @@ class ProductoList extends React.Component {
 					<tr>
 						<th>Nombre</th>
 						<th>Marca</th>
+						<th>Categoria</th>
 						<th>Acciones</th>
 					</tr>
 					{productos}
+					
 				</tbody>
 			</table>
 		)
@@ -91,6 +93,7 @@ class Producto extends React.Component {
 			<tr>
 				<td>{this.props.producto.nombre}</td>
 				<td>{this.props.producto.marca}</td>
+				<td>{this.props.producto.categoria}</td>
 				<td>
 					<Link to={"/listar-producto/" + id}>Ver</Link>
 				</td>

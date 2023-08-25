@@ -40958,14 +40958,14 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Bodega App (componente: HomePage)"), /*#__PURE__*/React.createElement(Titulo, {
         entidad: "Productos",
-        emoji: "\uD83C\uDF3F\uD83C\uDF41\uD83C\uDF3F\uD83C\uDF31"
+        emoji: "\uD83C\uDF3F"
       }), /*#__PURE__*/React.createElement(ProductoList, {
         productos: this.state.productos
       }), /*#__PURE__*/React.createElement(Link, {
         to: "/registrarProducto"
       }, "Registrar Producto"), /*#__PURE__*/React.createElement(Titulo, {
         entidad: "Categorias",
-        emoji: "\uD83C\uDF31\uD83E\uDEB4\uD83C\uDF32"
+        emoji: "\uD83C\uDF32"
       }), /*#__PURE__*/React.createElement(CategoriaList, {
         categorias: this.state.categorias
       }), /*#__PURE__*/React.createElement(Link, {
@@ -40996,7 +40996,7 @@ var ProductoList = /*#__PURE__*/function (_React$Component2) {
       });
       return /*#__PURE__*/React.createElement("table", {
         border: "1"
-      }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Nombre"), /*#__PURE__*/React.createElement("th", null, "Marca"), /*#__PURE__*/React.createElement("th", null, "Acciones")), productos));
+      }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Nombre"), /*#__PURE__*/React.createElement("th", null, "Marca"), /*#__PURE__*/React.createElement("th", null, "Categoria"), /*#__PURE__*/React.createElement("th", null, "Acciones")), productos));
     }
   }]);
   return ProductoList;
@@ -41035,7 +41035,7 @@ var Producto = /*#__PURE__*/function (_React$Component4) {
     key: "render",
     value: function render() {
       var id = this.props.producto._links.self.href.split("/").slice(-1);
-      return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, this.props.producto.nombre), /*#__PURE__*/React.createElement("td", null, this.props.producto.marca), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(Link, {
+      return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, this.props.producto.nombre), /*#__PURE__*/React.createElement("td", null, this.props.producto.marca), /*#__PURE__*/React.createElement("td", null, this.props.producto.categoria), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(Link, {
         to: "/listar-producto/" + id
       }, "Ver")));
     }
@@ -41224,7 +41224,8 @@ var _require = __webpack_require__(/*! react-router-dom */ "./node_modules/react
   Link = _require.Link,
   useParams = _require.useParams;
 var _require2 = __webpack_require__(/*! react */ "./node_modules/react/index.js"),
-  useState = _require2.useState;
+  useState = _require2.useState,
+  useEffect = _require2.useEffect;
 var client = __webpack_require__(/*! ../client */ "./src/main/js/client.js");
 var NuevoProductoPage = function NuevoProductoPage() {
   var _useState = useState(''),
@@ -41239,6 +41240,14 @@ var NuevoProductoPage = function NuevoProductoPage() {
     _useState6 = _slicedToArray(_useState5, 2),
     cantidad = _useState6[0],
     setCantidad = _useState6[1];
+  var _useState7 = useState([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    categorias = _useState8[0],
+    setCategorias = _useState8[1];
+  var _useState9 = useState(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    idCategoria = _useState10[0],
+    setIdCategoria = _useState10[1];
   var handleSubmit = function handleSubmit(evento) {
     evento.preventDefault();
     client({
@@ -41247,7 +41256,8 @@ var NuevoProductoPage = function NuevoProductoPage() {
       entity: {
         nombre: nombre,
         marca: marca,
-        cantidad: cantidad
+        cantidad: cantidad,
+        categorias: 'http://localhost:8080/api/categorias/' + idCategoria
       },
       headers: {
         'Content-Type': 'application/json'
@@ -41256,6 +41266,14 @@ var NuevoProductoPage = function NuevoProductoPage() {
       window.location = '/';
     });
   };
+  useEffect(function () {
+    client({
+      method: 'GET',
+      path: '/api/categorias'
+    }).done(function (response) {
+      setCategorias(response.entity._embedded.categorias);
+    });
+  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Registrar Producto"), /*#__PURE__*/React.createElement("form", {
     onSubmit: handleSubmit
   }, /*#__PURE__*/React.createElement("label", null, "Nombre"), " ", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
@@ -41279,7 +41297,19 @@ var NuevoProductoPage = function NuevoProductoPage() {
     onChange: function onChange(e) {
       return setCantidad(e.target.value);
     }
-  }), " ", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+  }), " ", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", null, "Categoria "), /*#__PURE__*/React.createElement("select", {
+    name: "categoria",
+    id: "categoria",
+    onChange: function onChange(e) {
+      setIdCategoria(e.target.value);
+    }
+  }, categorias.map(function (categoria) {
+    var value = categoria._links.self.href.split('/').slice(-1);
+    return /*#__PURE__*/React.createElement("option", {
+      key: value,
+      value: value
+    }, "(", categoria.nombre, ")");
+  })), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
     type: "submit",
     value: "Nuevo Producto"
   })), /*#__PURE__*/React.createElement(Link, {
